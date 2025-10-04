@@ -1,0 +1,23 @@
+{
+    "name": "Buscador de Serviços Públicos (OSM)",
+    "short_name": "Serviços Próximos",
+    "description": "Encontre serviços públicos e essenciais próximos, como hospitais, polícia e caixas eletrônicos, usando Geolocalização.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0d6efd",
+    "icons": [
+        {
+            
+            "src": "./icon/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "./icon/icon-196.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "image/png"
+        }
+    ]
+}
