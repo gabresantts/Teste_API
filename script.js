@@ -64,14 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
 );
 out center;
 `;
-        // 5. Executa a Busca com a Overpass API (POST Request)
-        fetch(OVERPASS_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded' 
-            },
-            body: 'data=' + encodeURIComponent(overpassQuery)
-        })
+        
+        // ***************************************************************
+        // CORREÇÃO: Mudar de POST para GET para resolver o erro 400 da Overpass API
+        // ***************************************************************
+        const queryUrl = OVERPASS_API_URL + '?data=' + encodeURIComponent(overpassQuery);
+
+        // 5. Executa a Busca com a Overpass API (Agora usando GET com a URL construída)
+        fetch(queryUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na API Overpass: ${response.status}.`);
