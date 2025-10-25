@@ -1,7 +1,6 @@
 const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
 
 function searchSongs(searchTerm) {
-    // Usando jQuery para manipular o DOM
     $('#results-container').empty();
 
     if (!searchTerm) {
@@ -17,16 +16,28 @@ function searchSongs(searchTerm) {
         url: url,
         method: "GET",
         success: function(response) {
+            let data;
+            
+            // Tenta parsear a resposta. 
+            // O proxy allorigins.win retorna o JSON como uma string de texto, exigindo o parse.
             try {
-                // A resposta bruta do allorigins é uma string que precisa ser parseada
-                const data = JSON.parse(response);
-                if (data.results.length === 0) {
-                    $('#results-container').html('<p class="error-text">Nenhum resultado encontrado. Tente outra busca.</p>');
-                } else {
-                    renderResults(data.results);
-                }
+                data = JSON.parse(response); 
             } catch (e) {
-                $('#results-container').html('<p class="error-text">Erro ao processar os dados da busca.</p>');
+                 // Captura o erro se o proxy retornar algo que não seja JSON (ex: HTML de erro)
+                 console.error('Falha ao parsear JSON:', e);
+                 // Mensagem mais específica
+                 $('#results-container').html('<p class="error-text">Erro ao processar os dados da busca. (Possível instabilidade no proxy CORS).</p>');
+                 return;
+            }
+
+            // Continua o processamento se o parse foi bem-sucedido
+            if (data.results && data.results.length === 0) {
+                $('#results-container').html('<p class="error-text">Nenhum resultado encontrado. Tente outra busca.</p>');
+            } else if (data.results) {
+                renderResults(data.results);
+            } else {
+                 // Caso a estrutura da resposta (data.results) seja inesperada.
+                 $('#results-container').html('<p class="error-text">Erro: Resposta da API inesperada.</p>');
             }
         },
         error: function(xhr, status, error) {
@@ -39,7 +50,6 @@ function searchSongs(searchTerm) {
 function renderResults(results) {
     $('#results-container').empty();
 
-    // Agrupa os resultados por gênero
     const groupedByGenre = results.reduce((acc, item) => {
         const genre = item.primaryGenreName || 'Outro';
         if (!acc[genre]) {
@@ -49,7 +59,6 @@ function renderResults(results) {
         return acc;
     }, {});
 
-    // Renderiza cada grupo de gênero
     for (const genre in groupedByGenre) {
         const genreContainer = $('<div>').addClass('mb-4');
         const genreTitle = $('<h2>').addClass('text-left text-muted mb-3').text(genre);
@@ -57,7 +66,6 @@ function renderResults(results) {
 
         groupedByGenre[genre].forEach(item => {
             const releaseYear = new Date(item.releaseDate).getFullYear();
-            // Cria o card da música com os dados
             const musicCard = $('<div>').addClass('music-card').html(`
                 <img src="${item.artworkUrl100}" alt="Capa da música" class="album-image">
                 <p class="font-weight-bold text-sm leading-tight mt-2">${item.trackName}</p>
