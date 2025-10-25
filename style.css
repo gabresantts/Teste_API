@@ -10,10 +10,14 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
-    /* NOVO PADRÃO DE PARTITURA: Mais estável e limpo */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cg stroke='%23333' stroke-width='1' opacity='0.5'%3E%3Cline x1='0' y1='50' x2='200' y2='50'/%3E%3Cline x1='0' y1='70' x2='200' y2='70'/%3E%3Cline x1='0' y1='90' x2='200' y2='90'/%3E%3Cline x1='0' y1='110' x2='200' y2='110'/%3E%3Cline x1='0' y1='130' x2='200' y2='130'/%3E%3C/g%3E%3Ctext x='10' y='105' font-size='20' fill='%23444' opacity='0.6'%3E%E2%99%AB%3C/text%3E%3Ctext x='100' y='75' font-size='20' fill='%23444' opacity='0.6'%3E%E2%99%AA%3C/text%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 200px; /* Ajuste para o novo tamanho do SVG */
+    
+    /* SEÇÃO RESERVADA PARA IMAGEM DE FUNDO REAL */
+    /* ATENÇÃO: Substitua 'caminho/para/sua/imagem.jpg' pelo link ou caminho da imagem */
+    background-image: url('https://br.pinterest.com/pin/300615343914314518/'); 
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-repeat: no-repeat; /* Evita repetição */
+    background-attachment: fixed; /* Opcional: Fundo fixo ao rolar */
+    background-position: center center; /* Centraliza a imagem */
 }
 
 .jumbotron {
