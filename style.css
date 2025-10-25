@@ -11,14 +11,15 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     
-    /* SEÇÃO RESERVADA PARA IMAGEM DE FUNDO REAL */
-    /* ATENÇÃO: Substitua 'caminho/para/sua/imagem.jpg' pelo link ou caminho da imagem */
-    background-image: url('https://assets.pinterest.com/ext/embed.html?id=300615343914314518" height="618" width="345" frameborder="0" scrolling="no" ></iframe>'); 
-    background-size: cover; /* Faz a imagem cobrir toda a área */
-    background-repeat: no-repeat; /* Evita repetição */
-    background-attachment: fixed; /* Opcional: Fundo fixo ao rolar */
-    background-position: center center; /* Centraliza a imagem */
+    /* CÓDIGO PARA PUXAR IMAGEM DA MESMA PASTA */
+    background-image: url('fundo-musica.jpg'); /* Substitua 'fundo-musica.jpg' pelo nome real do seu arquivo */
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center center; 
 }
+/* ... restante do seu código CSS ... */
 
 .jumbotron {
     background-color: var(--card-background);
