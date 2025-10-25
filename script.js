@@ -1,4 +1,5 @@
-const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+// NOVO CORS PROXY: Trocado de allorigins.win para corsproxy.io, que tende a ser mais estável.
+const CORS_PROXY = 'https://corsproxy.io/?';
 
 function searchSongs(searchTerm) {
     $('#results-container').empty();
@@ -10,39 +11,34 @@ function searchSongs(searchTerm) {
 
     $('#results-container').html('<p class="status-text">Buscando...</p>');
 
-    const url = `${CORS_PROXY}https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song`;
+    // 1. URL da API do iTunes a ser buscada
+    const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song`;
+    
+    // 2. URL completa, codificando a URL de destino para o novo proxy
+    const url = `${CORS_PROXY}${encodeURIComponent(itunesUrl)}`;
 
     $.ajax({
         url: url,
         method: "GET",
-        success: function(response) {
-            let data;
-            
-            // Tenta parsear a resposta. 
-            // O proxy allorigins.win retorna o JSON como uma string de texto, exigindo o parse.
-            try {
-                data = JSON.parse(response); 
-            } catch (e) {
-                 // Captura o erro se o proxy retornar algo que não seja JSON (ex: HTML de erro)
-                 console.error('Falha ao parsear JSON:', e);
-                 // Mensagem mais específica
-                 $('#results-container').html('<p class="error-text">Erro ao processar os dados da busca. (Possível instabilidade no proxy CORS).</p>');
-                 return;
-            }
-
-            // Continua o processamento se o parse foi bem-sucedido
-            if (data.results && data.results.length === 0) {
+        // jQuery tentará parsear a resposta como JSON automaticamente, 
+        // eliminando a necessidade do try/catch manual do JSON.parse.
+        dataType: 'json', 
+        
+        success: function(data) {
+            // 'data' já é o objeto JSON.
+            if (data && data.results && data.results.length === 0) {
                 $('#results-container').html('<p class="error-text">Nenhum resultado encontrado. Tente outra busca.</p>');
-            } else if (data.results) {
+            } else if (data && data.results) {
                 renderResults(data.results);
             } else {
-                 // Caso a estrutura da resposta (data.results) seja inesperada.
-                 $('#results-container').html('<p class="error-text">Erro: Resposta da API inesperada.</p>');
+                 // Erro se a estrutura for inesperada (o que raramente acontece com dataType: 'json')
+                 $('#results-container').html('<p class="error-text">Erro: Resposta da API inesperada. (Tente buscar novamente).</p>');
             }
         },
         error: function(xhr, status, error) {
             console.error('Falha na busca:', error);
-            $('#results-container').html('<p class="error-text">Não foi possível realizar a busca. Verifique sua conexão.</p>');
+            // Esta mensagem de erro agora cobre falhas de rede e problemas no proxy
+            $('#results-container').html('<p class="error-text">Não foi possível realizar a busca. Verifique sua conexão ou a estabilidade do servidor.</p>');
         }
     });
 }
