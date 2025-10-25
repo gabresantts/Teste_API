@@ -1,10 +1,9 @@
 :root {
-    --primary-color: #0C4A60; /* Cor principal, um azul escuro */
-    /* ALTERADO: Fundo do corpo para cinza claro (como na imagem) */
+    --primary-color: #0C4A60;
     --background-color: #F0F0F0; 
-    --text-color: #333333; /* ALTERADO: Cor do texto para escuro para contraste no fundo claro */
-    --card-background: #FFFFFF; /* ALTERADO: Fundo dos cards para branco no fundo claro */
-    --shadow-color: rgba(0, 0, 0, 0.2); /* Sombra mais sutil */
+    --text-color: #333333;
+    --card-background: #FFFFFF;
+    --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -12,12 +11,9 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     
-    /* REMOVIDO: Nenhuma imagem de fundo para que fique uniforme */
-    /* REMOVIDO: background-image, background-size, etc. */
 }
 
 .jumbotron {
-    /* MANTIDO: Cor do jumbotron para um cinza claro ligeiramente mais escuro que o fundo */
     background-color: #E0E0E0; 
     color: var(--text-color);
     box-shadow: 0 4px 15px var(--shadow-color);
@@ -27,7 +23,6 @@ h1 {
     color: var(--primary-color);
 }
 
-/* O restante do CSS para cards, grid e footer permanece funcional */
 .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -36,7 +31,6 @@ h1 {
 }
 
 .music-card {
-    /* Ajustado para se destacar no fundo claro */
     background-color: #F8F8F8; 
     padding: 15px;
     border-radius: 12px;
@@ -61,7 +55,7 @@ h1 {
 
 .status-text {
     font-style: italic;
-    color: #666; /* Ajustado para fundo claro */
+    color: #666;
 }
 
 .error-text {
@@ -71,7 +65,6 @@ h1 {
 footer {
     margin-top: 40px;
     padding: 20px;
-    /* Cor mais escura para contraste */
     color: #777; 
     font-size: 14px;
 }

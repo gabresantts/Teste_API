@@ -1,4 +1,3 @@
-// NOVO CORS PROXY: Trocado de allorigins.win para corsproxy.io, que tende a ser mais estável.
 const CORS_PROXY = 'https://corsproxy.io/?';
 
 function searchSongs(searchTerm) {
@@ -11,33 +10,26 @@ function searchSongs(searchTerm) {
 
     $('#results-container').html('<p class="status-text">Buscando...</p>');
 
-    // 1. URL da API do iTunes a ser buscada
     const itunesUrl = `https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=song`;
     
-    // 2. URL completa, codificando a URL de destino para o novo proxy
     const url = `${CORS_PROXY}${encodeURIComponent(itunesUrl)}`;
 
     $.ajax({
         url: url,
-        method: "GET",
-        // jQuery tentará parsear a resposta como JSON automaticamente, 
-        // eliminando a necessidade do try/catch manual do JSON.parse.
+        method: "GET", 
         dataType: 'json', 
         
         success: function(data) {
-            // 'data' já é o objeto JSON.
             if (data && data.results && data.results.length === 0) {
                 $('#results-container').html('<p class="error-text">Nenhum resultado encontrado. Tente outra busca.</p>');
             } else if (data && data.results) {
                 renderResults(data.results);
             } else {
-                 // Erro se a estrutura for inesperada (o que raramente acontece com dataType: 'json')
                  $('#results-container').html('<p class="error-text">Erro: Resposta da API inesperada. (Tente buscar novamente).</p>');
             }
         },
         error: function(xhr, status, error) {
             console.error('Falha na busca:', error);
-            // Esta mensagem de erro agora cobre falhas de rede e problemas no proxy
             $('#results-container').html('<p class="error-text">Não foi possível realizar a busca. Verifique sua conexão ou a estabilidade do servidor.</p>');
         }
     });
