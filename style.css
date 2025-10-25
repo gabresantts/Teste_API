@@ -1,9 +1,10 @@
 :root {
     --primary-color: #0C4A60; /* Cor principal, um azul escuro */
-    --background-color: #121212; /* Fundo do corpo, preto escuro */
-    --text-color: #E0E0E0; /* Cor do texto, cinza claro */
-    --card-background: #1E1E1E; /* Fundo dos cards, cinza mais escuro */
-    --shadow-color: rgba(0, 0, 0, 0.4);
+    /* ALTERADO: Fundo do corpo para cinza claro (como na imagem) */
+    --background-color: #F0F0F0; 
+    --text-color: #333333; /* ALTERADO: Cor do texto para escuro para contraste no fundo claro */
+    --card-background: #FFFFFF; /* ALTERADO: Fundo dos cards para branco no fundo claro */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* Sombra mais sutil */
 }
 
 body {
@@ -11,18 +12,13 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     
-    /* CÓDIGO PARA PUXAR IMAGEM DA MESMA PASTA */
-    background-image: url('fundo-musica.jpg'); /* Substitua 'fundo-musica.jpg' pelo nome real do seu arquivo */
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-position: center center; 
+    /* REMOVIDO: Nenhuma imagem de fundo para que fique uniforme */
+    /* REMOVIDO: background-image, background-size, etc. */
 }
-/* ... restante do seu código CSS ... */
 
 .jumbotron {
-    background-color: var(--card-background);
+    /* MANTIDO: Cor do jumbotron para um cinza claro ligeiramente mais escuro que o fundo */
+    background-color: #E0E0E0; 
     color: var(--text-color);
     box-shadow: 0 4px 15px var(--shadow-color);
 }
@@ -31,6 +27,7 @@ h1 {
     color: var(--primary-color);
 }
 
+/* O restante do CSS para cards, grid e footer permanece funcional */
 .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -39,14 +36,15 @@ h1 {
 }
 
 .music-card {
-    background-color: #282828;
+    /* Ajustado para se destacar no fundo claro */
+    background-color: #F8F8F8; 
     padding: 15px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }
 
@@ -63,7 +61,7 @@ h1 {
 
 .status-text {
     font-style: italic;
-    color: #AAA;
+    color: #666; /* Ajustado para fundo claro */
 }
 
 .error-text {
@@ -73,6 +71,7 @@ h1 {
 footer {
     margin-top: 40px;
     padding: 20px;
-    color: #888;
+    /* Cor mais escura para contraste */
+    color: #777; 
     font-size: 14px;
 }
