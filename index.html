@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Buscador de Músicas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="jumbotron text-center">
+        <h1>Buscador de Músicas</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form>
+                        <input id="searchInput" class="form-control" type="text" placeholder="Digite o nome do artista ou música...">
+                        <br />
+                        <a class="btn btn-primary" onclick="searchSongs(document.getElementById('searchInput').value)">Buscar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="results-container"></div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <footer class="text-center">
+        <p>&copy; 2025 Gabriel Gleydson Lima Dos Santos. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
